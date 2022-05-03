@@ -1,14 +1,13 @@
 package com.example.audiovideoapp;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.webkit.URLUtil;
 import android.widget.MediaController;
 import android.widget.Toast;
 import android.widget.VideoView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class VideoActivity extends AppCompatActivity {
 
@@ -35,20 +34,14 @@ public class VideoActivity extends AppCompatActivity {
             videoView.setVideoURI(uri);
         }
 
-        videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-            @Override
-            public void onPrepared(MediaPlayer mediaPlayer) {
-                videoView.start();
-                //videoView.getCurrentPosition();
-            }
+        videoView.setOnPreparedListener(mediaPlayer -> {
+            videoView.start();
+            //videoView.getCurrentPosition();
         });
 
-        videoView.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-            @Override
-            public void onCompletion(MediaPlayer mediaPlayer) {
-                Toast.makeText(VideoActivity.this, "Video finished", Toast.LENGTH_SHORT).show();
-                videoView.seekTo(0);
-            }
+        videoView.setOnCompletionListener(mediaPlayer -> {
+            Toast.makeText(VideoActivity.this, "Video finished", Toast.LENGTH_SHORT).show();
+            videoView.seekTo(0);
         });
     }
 }
